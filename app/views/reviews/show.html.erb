@@ -7,6 +7,14 @@
   <%= @review.score %> / 10
 </div>
 
+<div class="price">
+  Price: <%= @review.price %>
+</div>
+
+<div class="cuisine">
+  Cuisine: <%= @review.cuisine %>
+</div>
+
 <% if @review.ambiance.present? %>
   <div class="ambiance">
     Ambiance: <%= @review.ambiance %>
