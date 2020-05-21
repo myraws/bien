@@ -1,33 +1,41 @@
 <% content_for :page_title, "Homepage" %>
 
-<nav class="filters">
-  <%= active_link_to "All prices", root_path, active: { price: nil, cuisine: nil, location: nil } %>
-  <%= active_link_to "$", root_path(price: 1, cuisine: @cuisine, location: @location), active: { price: 1 } %>
-  <%= active_link_to "$$", root_path(price: 2, cuisine: @cuisine, location: @location), active: { price: 2 } %>
-  <%= active_link_to "$$$", root_path(price: 3, cuisine: @cuisine, location: @location), active: { price: 3 } %>
+  <nav class="filters">
+    <%= active_link_to "All prices", root_path, active: { price: nil, cuisine: nil, location: nil } %>
+    <%= active_link_to "$", root_path(price: 1, cuisine: @cuisine, location: @location), active: { price: 1 } %>
+    <%= active_link_to "$$", root_path(price: 2, cuisine: @cuisine, location: @location), active: { price: 2 } %>
+    <%= active_link_to "$$$", root_path(price: 3, cuisine: @cuisine, location: @location), active: { price: 3 } %>
 
-  <%= active_link_to "Italian", root_path(cuisine: "Italian", price: @price, location: @location), active: { cuisine: "Italian" } %>
-  <%= active_link_to "Mexican", root_path(cuisine: "Mexican", price: @price, location: @location), active: { cuisine: "Mexican" } %>
-  <%= active_link_to "American", root_path(cuisine: "American", price: @price, location: @location), active: { cuisine: "American" } %>
+    <%= active_link_to "Italian", root_path(cuisine: "Italian", price: @price, location: @location), active: { cuisine: "Italian" } %>
+    <%= active_link_to "Mexican", root_path(cuisine: "Mexican", price: @price, location: @location), active: { cuisine: "Mexican" } %>
+    <%= active_link_to "American", root_path(cuisine: "American", price: @price, location: @location), active: { cuisine: "American" } %>
 
-  <form class="" action="/">
-    <input type="text" name="location" placeholder="Search location..." value="<%= @location %>">
-    <input type="hidden" name="price" value="<%= @price %>">
-    <input type="hidden" name="cuisine" value="<%= @cuisine %>">
-  </form>
-</nav>
+    <form class="" action="/">
+      <input type="text" name="location" placeholder="Search location..." value="<%= @location %>">
+      <input type="hidden" name="price" value="<%= @price %>">
+      <input type="hidden" name="cuisine" value="<%= @cuisine %>">
+    </form>
+  </nav>
 
-<% @reviews.each do |review| %>
+  <% @reviews.each do |review| %>
 
-  <div class="review">
-    <%= link_to review_path(review) do %>
-      <h2><%= review.title %></h2>
-      <p>
-        <%= review.cuisine %> -
-        <%= pluralize review.comments.count, "comment" %> 
-      </p>
+    <div class="review">
+      <%= link_to review_path(review) do %>
 
-    <% end %>
-  </div>
+        <% if review.photo? %>
+          <%= image_tag(review.photo.thumb.url)%>
+        <% else %>
+          <%= image_tag(review.photo.thumb.default_url)%>
+        <% end %>
 
-<% end %>
+        <h2><%= review.title %></h2>
+        <p>
+          <%= review.cuisine %>
+          -
+          <%= pluralize review.comments.count, "comment" %>
+        </p>
+
+      <% end %>
+    </div>
+
+  <% end %>

@@ -44,6 +44,17 @@ gem "active_link_to"
 # make sure no one is swearing
 gem "profanity_filter"
 
+# lets add uploading files
+gem 'carrierwave', '~> 2.0'
+gem 'mini_magick'
+gem 'fog-aws'
+
+# add admin panel
+gem 'activeadmin'
+gem 'devise'
+gem 'cancancan'
+gem 'draper'
+gem 'pundit'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.4.2', require: false
